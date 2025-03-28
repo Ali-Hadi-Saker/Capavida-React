@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './Styles/App.css';
+import './Styles/colors.css';
+import './Styles/index.css';
+import './Styles/utilities.css';
+
 import Register from './Pages/Register';
 import Login from './Pages/Login';
 
