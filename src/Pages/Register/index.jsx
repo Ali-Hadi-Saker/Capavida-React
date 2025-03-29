@@ -1,4 +1,5 @@
 import './style.css';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     return(
@@ -14,6 +15,9 @@ const Register = () => {
                 <input type="password" placeholder="Password"/>
                 <input type="password" placeholder="Confirm Password"/>
                 <button>Submit</button>
+                <p className="login-link">already have an account{"  "}
+                <Link to="/login">login here</Link>
+                </p>
             </div>
         </div>
     )
