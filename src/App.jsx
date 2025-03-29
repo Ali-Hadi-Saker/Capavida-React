@@ -5,6 +5,7 @@ import './Styles/utilities.css';
 
 import Register from './Pages/Register';
 import Login from './Pages/Login';
+import Home from './Pages/Home';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Register/>}></Route>
           <Route path='/Login' element={<Login/>}></Route>
+          <Route path='/Home' element={<Home/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
