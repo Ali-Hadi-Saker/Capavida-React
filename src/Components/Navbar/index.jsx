@@ -2,8 +2,8 @@ import './style.css';
 
 const Navbar = () => {
     return(
-        <nav className='flex navbar'>
-                <ul>
+        <nav className='navbar flex'>
+                <ul className='nav-list flex'>
                     <li>Menu</li>
                     <li>Dashboard</li>
                     <li>Notification</li>
