@@ -1,12 +1,13 @@
 import './style.css';
 
+
 const Navbar = () => {
     return(
         <nav className='navbar flex'>
                 <ul className='nav-list flex'>
-                    <li>Menu</li>
+                    <li><i className="fa fa-bars" aria-hidden="true"></i></li>
                     <li>Dashboard</li>
-                    <li>Notification</li>
+                    <li><i className="fa fa-bell" aria-hidden="true"></i></li>
                 </ul>
             </nav>
     );
