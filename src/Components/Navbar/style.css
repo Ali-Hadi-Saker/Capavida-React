@@ -1,8 +1,15 @@
-.navbar{
-    justify-content: center;
+.navbar {
     align-items: center;
+    justify-content: space-between;
+    background-color: #007bff;
+    padding: 10px 20px;
 }
 
-.nav-list{
+.nav-list {
     list-style: none;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
+
+
