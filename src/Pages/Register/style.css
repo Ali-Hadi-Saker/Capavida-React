@@ -6,6 +6,9 @@
     gap: 10px;
     border-radius: 5px;
 }
+h1{
+    margin-bottom: 15px;
+}
 input{
     padding: 10px 5px;
     width: 90%;
