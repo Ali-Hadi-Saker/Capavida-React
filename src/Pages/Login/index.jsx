@@ -8,7 +8,7 @@ const Login = () => {
             <div className="flex column center auth-box">
                 <input type="text" placeholder="Email Adress"/>
                 <input type="password" placeholder="Password"/>
-                <button>Submit</button>
+                <button>Login</button>
                 <p className="login-link black-text">dont have an account{"  "}
                 <Link to="/">Sign-up here</Link>
                 </p>
