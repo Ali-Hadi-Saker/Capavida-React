@@ -1,9 +1,10 @@
 import './style.css';
 
-const Sidebar = ({isOpen, toggleSideBar})=> {
+const Sidebar = ({isOpen, toggleSidebar})=> {
     return(
-        <div className='sidebar'>
-            <button className='close-btn'>X</button>
+        <>
+            <div className={`sidebar ${isOpen ? "open" : ""}`}>
+            <button className='close-btn' onClick={toggleSidebar}>X</button>
             <ul className='sidebar-menu'>
                 <li>Dashboard</li>
                 <li>Profile</li>
@@ -13,6 +14,7 @@ const Sidebar = ({isOpen, toggleSideBar})=> {
                 <li>Help Center</li>
             </ul>
         </div>
+        </>
     )
 }
 
