@@ -67,7 +67,7 @@ const Home = () => {
     return (
     <>
         <h1 >Home page</h1>
-        <Navbar />
+        
         <div className='flex column center'>
         <section className="question-section" aria-labelledby="question-heading">
         <form onSubmit={handleSubmit} className="question-form">

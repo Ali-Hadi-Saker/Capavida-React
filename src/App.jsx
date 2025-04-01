@@ -11,12 +11,14 @@ import Marketplace from './Pages/Marketplace';
 import Help from './Pages/Help';
 import Community from './Pages/Community';
 import Internships from './Pages/Internships';
+import Navbar from './Components/Navbar';
 
 
 function App() {
   return (
     <div>
       <BrowserRouter >
+      <Navbar/>
         <Routes>
           <Route path='/' element={<Register/>}/>
           <Route path='/Login' element={<Login/>}/>
