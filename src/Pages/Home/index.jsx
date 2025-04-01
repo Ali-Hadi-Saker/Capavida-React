@@ -68,47 +68,53 @@ const Home = () => {
     <>
         <h1 >Home page</h1>
         
-        <div className='flex column center'>
-        <section className="question-section" aria-labelledby="question-heading">
-        <form onSubmit={handleSubmit} className="question-form">
-            <div className="input-group">
-            <label htmlFor="question-input" className="sr-only">
-                Your question
-            </label>
-            <input
-                id="question-input"
-                ref={inputRef}
-                type="text"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Ask AI..."
-                className="question-input"
-                aria-describedby="input-hint"
-                autoComplete="off"
-            />
-            </div>
-        </form>
-        </section>
+        <div className='flex column'>
+            <section className="question-section" aria-labelledby="question-heading">
+            <form onSubmit={handleSubmit} className="question-form">
+                <div className="input-group">
+                <label htmlFor="question-input" className="sr-only">
+                    Your question
+                </label>
+                <input
+                    id="question-input"
+                    ref={inputRef}
+                    type="text"
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    placeholder="Ask AI..."
+                    className="question-input"
+                    aria-describedby="input-hint"
+                    autoComplete="off"
+                />
+                </div>
+            </form>
+            </section>
 
-        <section className="response-section" aria-labelledby="response-heading">
+            <section className="response-section" aria-labelledby="response-heading">
 
-        <div
-            className="response-content"
-            aria-live="polite"
-            aria-atomic="true"
-            tabIndex={0}
-        >
-            {isLoading ? (
-            <div className="loading-indicator" aria-label="Loading response">
-                <p>Processing your question...</p>
+            <div
+                className="response-content"
+                aria-live="polite"
+                aria-atomic="true"
+                tabIndex={0}
+            >
+                {isLoading ? (
+                <div className="loading-indicator" aria-label="Loading response">
+                    <p>Processing your question...</p>
+                </div>
+                ) : response ? (
+                <div className="response-text">{response}</div>
+                ) : (
+                <p className="placeholder-text">Your response will appear here</p>
+                )}
             </div>
-            ) : response ? (
-            <div className="response-text">{response}</div>
-            ) : (
-            <p className="placeholder-text">Your response will appear here</p>
-            )}
-        </div>
-        </section>
+            </section>
+            <h3>Your Internships</h3>
+            <section className='internships-section'>
+            </section>
+            <h3>Your Marketplace</h3>
+            <section className='internships-section'>
+            </section>
         </div>
     </>
     );
