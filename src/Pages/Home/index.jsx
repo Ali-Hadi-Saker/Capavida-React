@@ -65,12 +65,11 @@ const Home = () => {
     return classes;
     };
     return (
-    <div>
-        <h1>Home page</h1>
+    <>
+        <h1 >Home page</h1>
         <Navbar />
+        <div className='flex column center'>
         <section className="question-section" aria-labelledby="question-heading">
-        <h2 id="question-heading">Ask a Question</h2>
-
         <form onSubmit={handleSubmit} className="question-form">
             <div className="input-group">
             <label htmlFor="question-input" className="sr-only">
@@ -82,7 +81,7 @@ const Home = () => {
                 type="text"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Type your question here and press Enter..."
+                placeholder="Ask AI..."
                 className="question-input"
                 aria-describedby="input-hint"
                 autoComplete="off"
@@ -110,7 +109,8 @@ const Home = () => {
             )}
         </div>
         </section>
-    </div>
+        </div>
+    </>
     );
 };
 
