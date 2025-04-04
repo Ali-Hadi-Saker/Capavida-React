@@ -12,6 +12,7 @@ import Help from './Pages/Help';
 import Community from './Pages/Community';
 import Internships from './Pages/Internships';
 import Navbar from './Components/Navbar';
+import RoleSelection from './Pages/RoleSelection';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
       <BrowserRouter >
       <Navbar/>
         <Routes>
-          <Route path='/' element={<Register/>}/>
+          <Route path='/' element={<RoleSelection/>}/>
+          <Route path='register/:role' element={<Register/>}/>
           <Route path='/Login' element={<Login/>}/>
           <Route path='/Home' element={<Home/>}/>
           <Route path="/profile" element={<Profile />} />
