@@ -1,0 +1,58 @@
+.role-selection-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ebeaff;
+    padding: 2rem;
+}
+
+.role-selection-title {
+    font-size: 2.5rem;
+    color: #0068b8;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.role-selection-buttons {
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.role-button {
+    background-color: white;
+    color: #0068b8;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.role-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    background-color: #0068b8;
+    color: #ffffff;
+}
+
+.role-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .role-selection-title {
+        font-size: 2rem;
+    }
+    
+    .role-selection-buttons {
+        max-width: 300px;
+    }
+    
+    .role-button {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
