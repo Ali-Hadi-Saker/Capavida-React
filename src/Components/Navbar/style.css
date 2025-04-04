@@ -31,26 +31,43 @@
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    color: #fff;
+    color: white;
     border-radius: 4px;
     transition: background-color 0.2s;
 }
 
 .menu-button:hover, .nav-button:hover {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 .nav-brand {
     text-decoration: none;
-    color: #fff;
+    color: white;
     font-weight: 600;
     font-size: 1.2rem;
+    padding-right: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {
     .navbar-content {
         padding: 0.6rem;
+    }
+    
+    .nav-brand {
+        display: none;
+    }
+    
+    .page-name {
+        margin-left: 0;
     }
 }
 
