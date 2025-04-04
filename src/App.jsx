@@ -16,11 +16,11 @@ import RoleSelection from './Pages/RoleSelection';
 
 const AppContent = () => {
   const location = useLocation();
-  const showNavbar = location.pathname !== '/';//hides the navbar only on the '/' route
+  const showNavbar = !['/register/Intern', '/register/Internship', '/register/Member', '/login', '/'].includes(location.pathname);
 
   return (
     <div>
-      {showNavbar && <Navbar />}//If the user is not on the root route ('/'), show the navbar.
+      {showNavbar && <Navbar />}
       <Routes>
         <Route path='/' element={<RoleSelection/>}/>
         <Route path='register/:role' element={<Register/>}/>
