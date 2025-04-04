@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import './Styles/colors.css';
 import './Styles/index.css';
 import './Styles/utilities.css';
@@ -14,25 +14,33 @@ import Internships from './Pages/Internships';
 import Navbar from './Components/Navbar';
 import RoleSelection from './Pages/RoleSelection';
 
+const AppContent = () => {
+  const location = useLocation();
+  const showNavbar = location.pathname !== '/';//hides the navbar only on the '/' route
+
+  return (
+    <div>
+      {showNavbar && <Navbar />}//If the user is not on the root route ('/'), show the navbar.
+      <Routes>
+        <Route path='/' element={<RoleSelection/>}/>
+        <Route path='register/:role' element={<Register/>}/>
+        <Route path='/Login' element={<Login/>}/>
+        <Route path='/Home' element={<Home/>}/>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/internships" element={<Internships />} />
+        <Route path="/help" element={<Help />} />
+      </Routes>
+    </div>
+  );
+};
 
 function App() {
   return (
-    <div>
-      <BrowserRouter >
-      <Navbar/>
-        <Routes>
-          <Route path='/' element={<RoleSelection/>}/>
-          <Route path='register/:role' element={<Register/>}/>
-          <Route path='/Login' element={<Login/>}/>
-          <Route path='/Home' element={<Home/>}/>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/marketplace" element={<Marketplace />} />
-          <Route path="/internships" element={<Internships />} />
-          <Route path="/help" element={<Help />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
