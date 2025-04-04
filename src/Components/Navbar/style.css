@@ -1,5 +1,5 @@
 .navbar {
-    background-color: white;
+    background-color: #0068b8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -31,7 +31,7 @@
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    color: #666;
+    color: #fff;
     border-radius: 4px;
     transition: background-color 0.2s;
 }
@@ -43,7 +43,7 @@
 
 .nav-brand {
     text-decoration: none;
-    color: #0068b8;
+    color: #fff;
     font-weight: 600;
     font-size: 1.2rem;
 }
