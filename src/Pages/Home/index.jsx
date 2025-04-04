@@ -1,5 +1,6 @@
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated, getAuthHeader, handleAuthResponse } from '../../utils/auth';
 import Navbar from "../../Components/Navbar";
 import "./style.css";
 
@@ -11,6 +12,46 @@ const Home = () => {
     const [fontSize, setFontSize] = useState("medium");
     const [highContrast, setHighContrast] = useState(false);
     const inputRef = useRef(null);
+    const [enrolledInternships, setEnrolledInternships] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate('/login');
+            return;
+        }
+        fetchEnrolledInternships();
+    }, [navigate]);
+
+    const fetchEnrolledInternships = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/internship/enrolled/me', {
+                headers: {
+                    ...getAuthHeader()
+                }
+            });
+
+            if (handleAuthResponse(response, navigate)) {
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch enrolled internships');
+            }
+
+            const data = await response.json();
+            setEnrolledInternships(Array.isArray(data.internships) ? data.internships : []);
+            setError(null);
+        } catch (err) {
+            setError('Failed to load your internships. Please try again later.');
+            console.error('Error fetching enrolled internships:', err);
+            setEnrolledInternships([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -64,6 +105,64 @@ const Home = () => {
     if (highContrast) classes += " high-contrast";
     return classes;
     };
+
+    const handleStartCourse = (internshipId) => {
+        // TODO: Implement course starting functionality
+        console.log('Starting course for internship:', internshipId);
+    };
+
+    const handleViewDetails = (internshipId) => {
+        // TODO: Navigate to internship details page
+        console.log('Viewing details for internship:', internshipId);
+    };
+
+    const renderEnrolledInternshipCard = (internship) => (
+        <div key={internship._id} className="enrolled-internship-card">
+            <div className="internship-header">
+                <h3 className="internship-title">{internship.title}</h3>
+                <span className="skill-badge">{internship.skillType}</span>
+            </div>
+            <div className="internship-details">
+                <p className="location">
+                    <i className="fa fa-location-dot"></i> {internship.location}
+                </p>
+                <p className="duration">
+                    <i className="fa fa-calendar"></i> {internship.duration}
+                </p>
+            </div>
+            {internship.pdfCourses && internship.pdfCourses.length > 0 && (
+                <div className="course-progress">
+                    <h4>Course Progress</h4>
+                    <div className="progress-bar">
+                        <div 
+                            className="progress-fill" 
+                            style={{ width: `${(internship.completedCourses || 0) / internship.pdfCourses.length * 100}%` }}
+                        ></div>
+                    </div>
+                    <span className="progress-text">
+                        {internship.completedCourses || 0}/{internship.pdfCourses.length} Courses Completed
+                    </span>
+                </div>
+            )}
+            <div className="action-buttons">
+                <button 
+                    className="view-details-btn"
+                    onClick={() => handleViewDetails(internship._id)}
+                >
+                    View Details
+                </button>
+                {internship.pdfCourses && internship.pdfCourses.length > 0 && (
+                    <button 
+                        className="start-course-btn"
+                        onClick={() => handleStartCourse(internship._id)}
+                    >
+                        <i className="fa fa-book"></i> Continue Learning
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+
     return (
     <>
         <h1 >Home page</h1>
@@ -109,8 +208,27 @@ const Home = () => {
                 )}
             </div>
             </section>
-            <h3>Your Internships</h3>
+            <h3>Your Enrolled Internships</h3>
             <section className='internships-section'>
+                {loading ? (
+                    <div className="loading-message">Loading your internships...</div>
+                ) : error ? (
+                    <div className="error-message">{error}</div>
+                ) : enrolledInternships.length === 0 ? (
+                    <div className="no-internships-message">
+                        <p>You haven't enrolled in any internships yet.</p>
+                        <button 
+                            className="browse-btn" 
+                            onClick={() => navigate('/internships')}
+                        >
+                            Browse Internships
+                        </button>
+                    </div>
+                ) : (
+                    <div className="enrolled-internships-grid">
+                        {enrolledInternships.map(renderEnrolledInternshipCard)}
+                    </div>
+                )}
             </section>
             <h3>Your Marketplace</h3>
             <section className='internships-section'>

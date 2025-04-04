@@ -16,7 +16,7 @@ import RoleSelection from './Pages/RoleSelection';
 
 const AppContent = () => {
   const location = useLocation();
-  const showNavbar = !['/register/Intern', '/register/Internship', '/register/Member', '/login', '/'].includes(location.pathname);
+  const showNavbar = !['/register/Intern', '/register/Internship', '/register/Member', '/login', '/', '/internships'].includes(location.pathname);
 
   return (
     <div>

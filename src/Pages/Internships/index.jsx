@@ -1,23 +1,40 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated, getAuthHeader, handleAuthResponse, clearAuth } from '../../utils/auth';
 import './style.css';
 
 const Internships = () => {
     const [internships, setInternships] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [enrollingId, setEnrollingId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate('/login');
+            return;
+        }
         fetchInternships();
-    }, []);
+    }, [navigate]);
 
     const fetchInternships = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/internship');
+            const response = await fetch('http://localhost:5000/api/internship', {
+                headers: {
+                    ...getAuthHeader()
+                }
+            });
+            
+            if (handleAuthResponse(response, navigate)) {
+                return;
+            }
+
             if (!response.ok) {
                 throw new Error('Failed to fetch internships');
             }
+
             const data = await response.json();
-            console.log(data);
             setInternships(data);
             setError(null);
         } catch (err) {
@@ -25,6 +42,41 @@ const Internships = () => {
             console.error('Error fetching internships:', err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleEnroll = async (internshipId) => {
+        setEnrollingId(internshipId);
+        try {
+            const response = await fetch(`http://localhost:5000/api/internship/${internshipId}/enroll`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeader()
+                }
+            });
+
+            if (handleAuthResponse(response, navigate)) {
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to enroll in internship');
+            }
+
+            // Refresh internships list to get updated enrollment status
+            await fetchInternships();
+            alert('Successfully enrolled in internship!');
+        } catch (err) {
+            console.error('Error enrolling in internship:', err);
+            const errorMessage = err.message || 'Failed to enroll in internship. Please try again.';
+            setError(errorMessage);
+            // Show error in a more user-friendly way
+            alert(errorMessage);
+        } finally {
+            setEnrollingId(null);
         }
     };
 
@@ -84,7 +136,19 @@ const Internships = () => {
                                     <i className="fa fa-book"></i> {internship.pdfCourses.length} Course{internship.pdfCourses.length > 1 ? 's' : ''} Available
                                 </div>
                             )}
-                            <button className="apply-btn">Apply Now</button>
+                            <button 
+                                className={`enroll-btn ${internship.isEnrolled ? 'enrolled' : ''} ${enrollingId === internship._id ? 'loading' : ''}`}
+                                onClick={() => handleEnroll(internship._id)}
+                                disabled={enrollingId === internship._id || internship.isEnrolled}
+                            >
+                                {enrollingId === internship._id ? (
+                                    <span className="loading-spinner"></span>
+                                ) : internship.isEnrolled ? (
+                                    'Enrolled'
+                                ) : (
+                                    'Enroll Now'
+                                )}
+                            </button>
                         </div>
                     ))}
                 </div>
