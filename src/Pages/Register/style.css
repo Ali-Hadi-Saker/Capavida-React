@@ -25,12 +25,117 @@ button{
     color: white;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 .login-link{
     font-size: 12px;
-    
 }
+
 .login-link a {
     text-decoration: none;
+}
+
+.disability-select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    min-height: 120px;
+    font-size: 14px;
+}
+
+.disability-select option {
+    padding: 8px;
+}
+
+.disability-select option:checked {
+    background-color: #0068b8;
+    color: white;
+}
+
+.select-helper {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.custom-select {
+    width: 90%;
+    position: relative;
+    user-select: none;
+}
+
+.select-header {
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    border: solid #666;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+}
+
+.arrow.down {
+    transform: rotate(45deg);
+}
+
+.arrow.up {
+    transform: rotate(-135deg);
+}
+
+.options-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.option:hover {
+    background-color: #f5f5f5;
+}
+
+.option.selected {
+    background-color: #e3f2fd;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #0068b8;
+    border-radius: 3px;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0068b8;
+    font-size: 12px;
+    font-weight: bold;
 }
