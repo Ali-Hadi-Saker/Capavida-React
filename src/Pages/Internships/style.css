@@ -211,3 +211,28 @@
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
+
+.section-title {
+    color: #333;
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+}
+
+.internship-card.recommended {
+    border: 2px solid #0068b8;
+    position: relative;
+    overflow: hidden;
+}
+
+.internship-card.recommended::before {
+    content: 'Recommended';
+    position: absolute;
+    top: 10px;
+    right: -30px;
+    background: #0068b8;
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
