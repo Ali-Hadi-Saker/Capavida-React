@@ -160,8 +160,8 @@ const Internships = () => {
                     </div>
                 </>
             )}
-            <button className="dashboard-btn" onClick={() => navigate('/home')} title="Go to Dashboard">
-                <i className="fa fa-arrow-right"></i>
+            <button className="dashboard-btn" onClick={() => navigate('/home')}>
+                Dashboard <i className="fa fa-arrow-right"></i>
             </button>
         </div>
     );
