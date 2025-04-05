@@ -76,9 +76,10 @@ const Internships = () => {
             }
 
             const data = await response.json();
+            console.log(data);
 
             if (!response.ok) {
-                throw new Error(data.message || 'Failed to enroll in internship');
+                throw new Error(data.error );
             }
 
             await fetchInternships();
@@ -97,14 +98,6 @@ const Internships = () => {
         return (
             <div className="internships-container">
                 <div className="loading-message">Loading internships...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="internships-container">
-                <div className="error-message">{error}</div>
             </div>
         );
     }
@@ -167,6 +160,9 @@ const Internships = () => {
                     </div>
                 </>
             )}
+            <button className="dashboard-btn" onClick={() => navigate('/home')} title="Go to Dashboard">
+                <i className="fa fa-arrow-right"></i>
+            </button>
         </div>
     );
 };
