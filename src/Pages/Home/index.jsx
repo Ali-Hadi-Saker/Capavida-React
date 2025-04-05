@@ -10,6 +10,7 @@ const Home = () => {
     const [question, setQuestion] = useState("");
     const [aiResponse, setAiResponse] = useState("");
     const [isAiLoading, setIsAiLoading] = useState(false);
+    const [withdrawingId, setWithdrawingId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,10 +39,49 @@ const Home = () => {
 
             const data = await response.json();
             setEnrolledInternships(Array.isArray(data.internships) ? data.internships : []);
+            setError(null);
         } catch (err) {
             setError('Failed to load internships');
+            console.error('Error fetching internships:', err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchWithdrawInternship = async (internshipId) => {
+        if (!internshipId) return;
+        
+        setWithdrawingId(internshipId);
+        setError(null);
+        
+        try {
+            const response = await fetch(`http://localhost:5000/api/internship/${internshipId}/withdraw`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeader()
+                }
+            });
+
+            if (handleAuthResponse(response, navigate)) {
+                return;
+            }
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message || 'Failed to withdraw from internship');
+            }
+
+            // Remove the withdrawn internship from the state
+            setEnrolledInternships(prev => prev.filter(internship => internship._id !== internshipId));
+            alert('Successfully withdrawn from internship');
+            
+        } catch (error) {
+            setError(error.message || 'Failed to withdraw from internship');
+            console.error('Withdrawal error:', error);
+            alert(error.message || 'Failed to withdraw from internship');
+        } finally {
+            setWithdrawingId(null);
         }
     };
 
@@ -76,16 +116,29 @@ const Home = () => {
     };
 
     const renderEnrolledInternshipCard = (internship) => (
-        <div key={internship._id} className="internship-card">
-            <h3>{internship.title}</h3>
-            <p>{internship.skillType}</p>
-            <p>{internship.location}</p>
-            <p>{internship.duration}</p>
+        <div key={internship._id} className="enrolled-internship-card">
+            <h3 className="internship-title">{internship.title}</h3>
+            <div className="internship-details">
+                <p><i className="fa fa-briefcase"></i> {internship.skillType}</p>
+                <p><i className="fa fa-location-dot"></i> {internship.location}</p>
+                <p><i className="fa fa-calendar"></i> {internship.duration}</p>
+            </div>
+            <button 
+                className={`withdraw-btn ${withdrawingId === internship._id ? 'loading' : ''}`}
+                onClick={() => fetchWithdrawInternship(internship._id)}
+                disabled={withdrawingId === internship._id}
+            >
+                {withdrawingId === internship._id ? (
+                    <span className="loading-spinner"></span>
+                ) : (
+                    'Withdraw'
+                )}
+            </button>
         </div>
     );
 
-    if (loading) return <div className="loading">Loading...</div>;
-    if (error) return <div className="error">{error}</div>;
+    if (loading) return <div className="loading-message">Loading...</div>;
+    if (error) return <div className="error-message">{error}</div>;
 
     return (
         <div className="container">
@@ -113,10 +166,10 @@ const Home = () => {
             {enrolledInternships.length === 0 ? (
                 <div className="no-internships">
                     <p>No internships enrolled</p>
-                    <button onClick={() => navigate('/internships')}>Browse Internships</button>
+                    <button className="browse-btn" onClick={() => navigate('/internships')}>Browse Internships</button>
                 </div>
             ) : (
-                <div className="internships-grid">
+                <div className="enrolled-internships-grid">
                     {enrolledInternships.map(renderEnrolledInternshipCard)}
                 </div>
             )}
