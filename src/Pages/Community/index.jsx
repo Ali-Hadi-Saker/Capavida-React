@@ -51,6 +51,9 @@ const Community = () => {
                     </div>
                 ))}
             </div>
+            <button className="create-community-btn">
+                <i className="fa fa-plus"></i> Create New Community
+            </button>
         </div>
     );
 };
