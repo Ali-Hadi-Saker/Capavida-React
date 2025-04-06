@@ -43,10 +43,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.faq-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 .faq-item h3 {
     color: #0068b8;
