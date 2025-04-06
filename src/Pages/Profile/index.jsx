@@ -13,6 +13,7 @@ const Profile = () => {
             navigate('/login');
             return;
         }
+        console.log(user);
         fetchEnrolledInternships();
     }, [navigate]);
 
@@ -49,7 +50,7 @@ const Profile = () => {
                 <div className="profile-info">
                     <div className="info-group">
                         <label>Name:</label>
-                        <span>{user.firstName} {user.lastName}</span>
+                        <span>{user.name}</span>
                     </div>
                     <div className="info-group">
                         <label>Email:</label>
