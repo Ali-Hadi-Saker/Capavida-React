@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrightnessProvider } from './context/BrightnessContext';
 import './Styles/colors.css';
 import './Styles/index.css';
 import './Styles/utilities.css';
@@ -32,8 +33,7 @@ const AppContent = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/internships" element={<Internships />} />
         <Route path="/help" element={<Help />} />
-        <Route path="/categories" element={< InternshipCategories/>} />
-
+        <Route path="/categories" element={<InternshipCategories/>} />
       </Routes>
     </div>
   );
@@ -42,7 +42,9 @@ const AppContent = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <BrightnessProvider>
+        <AppContent />
+      </BrightnessProvider>
     </BrowserRouter>
   );
 }

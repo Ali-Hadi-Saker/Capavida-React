@@ -1,4 +1,5 @@
 import Sidebar from '../Sidebar';
+import BrightnessControl from '../BrightnessControl';
 import './style.css';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -30,6 +31,7 @@ const Navbar = () => {
                     <span className="page-name">{getPageName()}</span>
                 </div>
                 <div className='navbar-right'>
+                    <BrightnessControl />
                     <button className="nav-button">
                         <i className="fa fa-bell"></i>
                     </button>
