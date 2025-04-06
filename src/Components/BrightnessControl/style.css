@@ -1,3 +1,9 @@
+.controls-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .brightness-control {
     display: flex;
     align-items: center;
@@ -51,13 +57,42 @@
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
+    .controls-container {
+        gap: 10px;
+    }
+
     .brightness-control {
         padding: 0 5px;
     }
 
     .brightness-slider {
         width: 80px;
+    }
+
+    .theme-toggle {
+        padding: 6px;
     }
 } 

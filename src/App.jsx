@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import { BrightnessProvider } from './context/BrightnessContext';
+import { ThemeProvider } from './context/BrightnessContext';
 import './Styles/colors.css';
 import './Styles/index.css';
 import './Styles/utilities.css';
+import './Styles/theme.css';
 
 import Register from './Pages/Register';
 import Login from './Pages/Login';
@@ -42,9 +43,9 @@ const AppContent = () => {
 function App() {
   return (
     <BrowserRouter>
-      <BrightnessProvider>
+      <ThemeProvider>
         <AppContent />
-      </BrightnessProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
