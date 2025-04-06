@@ -13,6 +13,7 @@ import Community from './Pages/Community';
 import Internships from './Pages/Internships';
 import Navbar from './Components/Navbar';
 import RoleSelection from './Pages/RoleSelection';
+import InternshipCategories from './Pages/InternshipCategories';
 
 const AppContent = () => {
   const location = useLocation();
@@ -31,6 +32,8 @@ const AppContent = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/internships" element={<Internships />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/categories" element={< InternshipCategories/>} />
+
       </Routes>
     </div>
   );

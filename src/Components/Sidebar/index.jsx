@@ -38,7 +38,7 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/internships" onClick={toggleSidebar} className="sidebar-link">
+                        <Link to="/categories" onClick={toggleSidebar} className="sidebar-link">
                             <i className="fa fa-graduation-cap"></i>
                             <span>Internships</span>
                         </Link>

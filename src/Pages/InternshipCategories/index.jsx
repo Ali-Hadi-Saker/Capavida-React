@@ -1,24 +1,53 @@
-import { useEffect, useState } from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './style.css';
 
-const internshipCategories = ()=> {
-    const [categories, setCategories] = useState([]);
-    useEffect(() => {fetchCategories()},[]);
-
-    const fetchCategories = async ()=> {
-        try {
-            const response = await fetch('http://localhost:5000/api/internship');
-            const data = await response.json();
-            console.log(data)
-
-            
-        } catch (error) {            
-            setError('Failed to load internships. Please try again later.');
-            console.error('Error fetching internships:', error);
+const InternshipCategories = () => {
+    const navigate = useNavigate();
+    const categories = [
+        {
+            name: "Practical Skill",
+            color: "#4CAF50", // Green
+            icon: "fa-tools"
+        },
+        {
+            name: "Labor Intensive Skill",
+            color: "#FF9800", // Orange
+            icon: "fa-hammer"
+        },
+        {
+            name: "Technical Skills",
+            color: "#2196F3", // Blue
+            icon: "fa-laptop-code"
+        },
+        {
+            name: "Business Skill",
+            color: "#9C27B0", // Purple
+            icon: "fa-briefcase"
+        },
+        {
+            name: "Care and Health",
+            color: "#E91E63", // Pink
+            icon: "fa-heart"
         }
-    }
-    return(
-        <div></div>
-    )
-}
+    ];
 
-export default internshipCategories;
+    return (
+        <div className="categories-container flex column">
+            <div className="categories-grid flex column">
+                {categories.map((category, index) => (
+                    <div 
+                        key={index} 
+                        className="category-card"
+                        style={{ backgroundColor: category.color }}
+                    >
+                        <i className={`fa ${category.icon}`}></i>
+                        <h2>{category.name}</h2>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default InternshipCategories;
