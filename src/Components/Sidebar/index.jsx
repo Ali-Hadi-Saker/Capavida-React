@@ -44,7 +44,7 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/help-center" onClick={toggleSidebar} className="sidebar-link">
+                        <Link to="/help" onClick={toggleSidebar} className="sidebar-link">
                             <i className="fa fa-question-circle"></i>
                             <span>Help Center</span>
                         </Link>
