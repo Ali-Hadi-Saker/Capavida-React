@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {getUser} from "../../utils/auth.js";
 import './style.css';
+import MarketPlaceCard from "../../Components/MarketplaceCard/index.jsx";
 
 const Marketplace = ()=> {
     const [matchedMarketPlace, setMatchedMarketPlace] = useState([]);
@@ -46,29 +47,13 @@ const Marketplace = ()=> {
     }
 
     return(
-        <div className="marketplace-container flex column">
+        <div className="marketplace-container">
             <div className="marketplace-grid">
-                {matchedMarketPlace.map(marketplace => (
-                    <div key={marketplace._id} className="marketplace-card">
-                        <h2 className="marketplace-name">{marketplace.name}</h2>
-                        <div className="marketplace-owner">
-                            <i className="fa fa-user"></i>
-                            <span>{marketplace.ownerName}</span>
-                        </div>
-                        <div className="marketplace-categories">
-                            <i className="fa fa-briefcase"></i>
-                            <span>{marketplace.category}</span>
-                        </div>
-                        <div className="marketplace-location">
-                            <i className="fa fa-location-dot"></i>
-                            <span>{marketplace.location}</span>
-                        </div>
-                        <div className="marketplace-disabilities">
-                            {marketplace.disabilityType.map((disability, index) => (
-                                <span key={index} className="disability-tag">{disability}</span>
-                            ))}
-                        </div>
-                    </div>
+                {matchedMarketPlace.map((marketplace, index) => (
+                    <MarketPlaceCard 
+                        key={index}
+                        marketplace={marketplace}
+                    />
                 ))}
             </div>
         </div>
