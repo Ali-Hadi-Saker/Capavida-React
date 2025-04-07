@@ -174,12 +174,12 @@ const Home = () => {
                 </div>
             )}
 
-            <section className="marketplace-section">
+            {/* <section className="marketplace-section">
                 <h2>Marketplace</h2>
                 <div className="marketplace-container">
                     <p className="marketplace-placeholder">Marketplace features coming soon...</p>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 };

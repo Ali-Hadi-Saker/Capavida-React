@@ -17,57 +17,6 @@
     padding: 1rem;
 }
 
-.community-card {
-    background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.community-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.community-icon {
-    font-size: 2.5rem;
-    color: #0068b8;
-    margin-bottom: 1rem;
-}
-
-.community-name {
-    color: #333;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.community-slogan {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-}
-
-.follow-btn {
-    background: #79cc60;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.2s;
-}
-
 .loading-message,
 .error-message {
     text-align: center;

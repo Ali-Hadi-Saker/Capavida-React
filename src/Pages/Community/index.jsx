@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuthHeader } from '../../utils/auth';
 import './style.css';
+import CommunityCard from '../../Components/CommunityCard';
 
 const Community = () => {
     const [communities, setCommunities] = useState([]);
@@ -104,16 +105,7 @@ const Community = () => {
             <h1>Communities</h1>
             <div className="communities-grid">
                 {communities.map(community => (
-                    <div key={community._id} className="community-card">
-                        <div className="community-icon">
-                            <i className="fa fa-users"></i>
-                        </div>
-                        <h2 className="community-name">{community.name}</h2>
-                        <p className="community-slogan">{community.slogan}</p>
-                        <button className="follow-btn">
-                            <i className="fa fa-plus"></i> Follow
-                        </button>
-                    </div>
+                    <CommunityCard community={community}/>
                 ))}
             </div>
             <button className="create-community-btn" onClick={() => setShowModal(true)}>
