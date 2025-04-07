@@ -1,5 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './style.css';
+
+const disabilities = [
+    "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
+    "Fetal Alcohol", "Dyscalculia", "Amputate", "Syndrome", "APD", 
+    "Narcolepsy", "Fragile X", "Deaf", "Other"
+];
+
+const categories = [
+    "Food Services and Products", 
+    "Textile Products and Services", 
+    "Artisan Products and Services"
+];
 
 const MarketplaceForm = ({ onSubmit, onClose }) => {
     const [formData, setFormData] = useState({
@@ -11,6 +23,20 @@ const MarketplaceForm = ({ onSubmit, onClose }) => {
         ownerName: '',
     });
 
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -19,12 +45,16 @@ const MarketplaceForm = ({ onSubmit, onClose }) => {
         }));
     };
 
-    const handleDisabilityChange = (e) => {
-        const { value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            disabilityType: value.split(',').map(item => item.trim())
-        }));
+    const toggleDisability = (disability) => {
+        setFormData(prev => {
+            const updatedDisabilities = prev.disabilityType.includes(disability)
+                ? prev.disabilityType.filter(d => d !== disability)
+                : [...prev.disabilityType, disability];
+            return {
+                ...prev,
+                disabilityType: updatedDisabilities
+            };
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -68,13 +98,19 @@ const MarketplaceForm = ({ onSubmit, onClose }) => {
                     </div>
                     <div className="form-group">
                         <label>Category:</label>
-                        <input
-                            type="text"
+                        <select
                             name="category"
                             value={formData.category}
                             onChange={handleInputChange}
                             required
-                        />
+                        >
+                            <option value="">Select a category</option>
+                            {categories.map((category, index) => (
+                                <option key={index} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label>Owner Name:</label>
@@ -87,15 +123,34 @@ const MarketplaceForm = ({ onSubmit, onClose }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Disability Types (comma-separated):</label>
-                        <input
-                            type="text"
-                            name="disabilityType"
-                            value={formData.disabilityType.join(', ')}
-                            onChange={handleDisabilityChange}
-                            placeholder="e.g., Visual Impairment, Hearing Impairment"
-                            required
-                        />
+                        <label>Disability Types:</label>
+                        <div className="custom-select" ref={dropdownRef}>
+                            <div 
+                                className="select-header" 
+                                onClick={() => setIsOpen(!isOpen)}
+                            >
+                                {formData.disabilityType.length === 0 
+                                    ? "Select Disabilities" 
+                                    : `Selected: ${formData.disabilityType.length}`}
+                                <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
+                            </div>
+                            {isOpen && (
+                                <div className="options-container">
+                                    {disabilities.map((disability, index) => (
+                                        <div 
+                                            key={index} 
+                                            className={`option ${formData.disabilityType.includes(disability) ? 'selected' : ''}`}
+                                            onClick={() => toggleDisability(disability)}
+                                        >
+                                            <span className="checkbox">
+                                                {formData.disabilityType.includes(disability) && '✓'}
+                                            </span>
+                                            {disability}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div className="form-actions">
                         <button type="button" onClick={onClose} className="cancel-btn">
