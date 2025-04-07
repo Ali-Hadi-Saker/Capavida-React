@@ -15,4 +15,4 @@ const CommunityCard = ({community})=> {
     )
 }
 
-export default CommunityCard
+export default CommunityCard;
