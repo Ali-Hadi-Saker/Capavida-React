@@ -47,7 +47,6 @@ const Marketplace = ()=> {
 
     return(
         <div className="marketplace-container flex column">
-            <h1>Marketplace</h1>
             <div className="marketplace-grid">
                 {matchedMarketPlace.map(marketplace => (
                     <div key={marketplace._id} className="marketplace-card">
@@ -55,6 +54,10 @@ const Marketplace = ()=> {
                         <div className="marketplace-owner">
                             <i className="fa fa-user"></i>
                             <span>{marketplace.ownerName}</span>
+                        </div>
+                        <div className="marketplace-categories">
+                            <i className="fa fa-briefcase"></i>
+                            <span>{marketplace.category}</span>
                         </div>
                         <div className="marketplace-location">
                             <i className="fa fa-location-dot"></i>

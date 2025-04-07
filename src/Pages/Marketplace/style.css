@@ -1,7 +1,8 @@
 .marketplace-container {
     padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
+    max-width: none;
 }
 
 .marketplace-container h1 {
@@ -11,10 +12,11 @@
 }
 
 .marketplace-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
-    padding: 1rem;
+    padding: 0;
+    width: 80%;
 }
 
 .marketplace-card {
@@ -26,6 +28,8 @@
     flex-direction: column;
     gap: 1rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    position: relative;
 }
 
 .marketplace-card:hover {
@@ -33,11 +37,32 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.marketplace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
 .marketplace-name {
     color: #0068b8;
     font-size: 1.2rem;
     font-weight: 600;
     margin: 0;
+}
+
+.marketplace-location {
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.marketplace-location i {
+    color: #0068b8;
 }
 
 .marketplace-owner {
@@ -51,14 +76,15 @@
     color: #0068b8;
 }
 
-.marketplace-location {
+.marketplace-categories {
     color: #666;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-.marketplace-location i {
+.marketplace-categories i {
     color: #0068b8;
 }
 
@@ -66,6 +92,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .disability-tag {
@@ -90,9 +117,5 @@
 @media (max-width: 768px) {
     .marketplace-container {
         padding: 1rem;
-    }
-    
-    .marketplace-grid {
-        grid-template-columns: 1fr;
     }
 }
