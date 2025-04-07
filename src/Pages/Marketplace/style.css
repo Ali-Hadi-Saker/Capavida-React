@@ -3,6 +3,8 @@
     width: 100%;
     margin: 0;
     max-width: none;
+    position: relative;
+    min-height: calc(100vh - 4rem);
 }
 
 .marketplace-container h1 {
@@ -114,8 +116,42 @@
     color: #dc3545;
 }
 
+.create-marketplace-btn {
+    width: 230px;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #0068b8;
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.create-marketplace-btn:hover {
+    background: #005399;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.create-marketplace-btn i {
+    font-size: 1.2rem;
+}
+
 @media (max-width: 768px) {
     .marketplace-container {
         padding: 1rem;
+    }
+    .create-marketplace-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.2rem;
     }
 }
