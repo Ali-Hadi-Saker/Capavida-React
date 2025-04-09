@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './style.css';
-import { getAuthHeader } from '../../utils/auth';
+import { getAuthHeader, getUser } from '../../utils/auth';
 
 const InternshipDashboard = ()=> {
 const [createdInternships, setCreatedInternships] = useState([]);
@@ -15,10 +15,19 @@ const fetchInternships = async ()=> {
         })
         const data = await response.json();
         console.log(data);
+        findCreatedInternships(data);
         
     } catch (error) {
         console.error('Error fetching internships:', error);
     }
+}
+
+const findCreatedInternships = (internships)=> {
+    const user = getUser();
+    const userId = user._id;
+    const matched = internships.filter(intership => intership.providerId == userId);
+    console.log(matched);
+    setCreatedInternships(matched);
 }
 
     return(
