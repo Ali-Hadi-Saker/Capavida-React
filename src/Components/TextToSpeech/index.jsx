@@ -66,17 +66,17 @@ const TextToSpeech = ({ text }) => {
                 disabled={!text}
             >
                 <i className={`fa ${isPaused ? 'fa-play' : 'fa-volume-up'}`}></i>
-                {isPaused ? 'Resume' : 'Read Aloud'}
+                {isSpeaking ? '' : 'Read Aloud'}
             </button>
             {isSpeaking && (
                 <>
                     <button onClick={handlePause} className="pause-btn">
                         <i className="fa fa-pause"></i>
-                        Pause
+                        
                     </button>
                     <button onClick={handleStop} className="stop-btn">
                         <i className="fa fa-stop"></i>
-                        Stop
+                        
                     </button>
                 </>
             )}
