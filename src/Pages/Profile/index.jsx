@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated, getUser, getAuthHeader } from '../../utils/auth';
+import { isAuthenticated, getUser, getAuthHeader, clearAuth } from '../../utils/auth';
 import './style.css';
 
 const Profile = () => {
@@ -34,6 +34,11 @@ const Profile = () => {
         } catch (err) {
             console.error('Error fetching internships:', err);
         }
+    };
+
+    const handleLogout = () => {
+        clearAuth();
+        navigate('/login');
     };
 
     if (!user) {
@@ -90,6 +95,11 @@ const Profile = () => {
                         <p className="no-internships">No internships enrolled</p>
                     )}
                 </div>
+
+                <button className="logout-btn" onClick={handleLogout}>
+                    <i className="fa fa-sign-out"></i>
+                    Logout
+                </button>
             </div>
         </div>
     );

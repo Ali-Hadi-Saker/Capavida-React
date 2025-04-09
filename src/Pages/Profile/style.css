@@ -9,6 +9,9 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-header {
@@ -103,4 +106,40 @@
     text-align: center;
     font-style: italic;
     margin: 1rem 0;
+}
+
+.logout-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
+    width: 200px;
+    align-self: center;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+}
+
+.logout-btn i {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 1rem;
+    }
+    
+    .logout-btn {
+        width: 100%;
+    }
 }
