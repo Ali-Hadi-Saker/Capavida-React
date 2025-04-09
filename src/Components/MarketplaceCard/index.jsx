@@ -1,6 +1,15 @@
 import './style.css';
+import TextToSpeech from '../TextToSpeech';
 
 const MarketPlaceCard = ({marketplace}) => {
+    const cardContent = `
+        ${marketplace.name}. 
+        Located at ${marketplace.location}. 
+        Owned by ${marketplace.ownerName}. 
+        Category: ${marketplace.category}. 
+        Suitable for: ${marketplace.disabilityType.join(', ')}.
+    `;
+
     return(
         <div className="marketplace-card">
             <div className="marketplace-header">
@@ -25,6 +34,7 @@ const MarketPlaceCard = ({marketplace}) => {
                     ))}
                 </div>
             )}
+            <TextToSpeech text={cardContent} />
         </div>
     )
 }

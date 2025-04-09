@@ -27,7 +27,7 @@ const Navbar = () => {
                     <button className="menu-button" onClick={toggleSidebar}>
                         <i className="fa fa-bars"></i>
                     </button>
-                    <Link to="/" className="nav-brand">CapaVida</Link>
+                    <span className="nav-brand">CapaVida</span>
                     <span className="page-name">{getPageName()}</span>
                 </div>
                 <div className='navbar-right'>
