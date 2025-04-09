@@ -9,6 +9,8 @@ const Register = () => {
         firstName: '',
         lastName: '',
         email: '',
+        phoneNumber: '',
+        memberId: '',
         disabilityCardCode: '',
         disabilityTypes: [],
         jobInterest: '',
@@ -58,7 +60,11 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.disabilityTypes.length === 0) {
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+        if (role === 'Intern' && formData.disabilityTypes.length === 0) {
             alert('Please select at least one disability');
             return;
         }
@@ -66,93 +72,207 @@ const Register = () => {
         console.log(formData);
     };
 
+    const renderInternForm = () => (
+        <>
+            <input 
+                type="text" 
+                placeholder="First Name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="email" 
+                placeholder="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Disability Card Code"
+                name="disabilityCardCode"
+                value={formData.disabilityCardCode}
+                onChange={handleChange}
+                required
+            />
+            <div className="custom-select" ref={dropdownRef}>
+                <div 
+                    className="select-header" 
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {formData.disabilityTypes.length === 0 
+                        ? "Select Disabilities" 
+                        : `Selected: ${formData.disabilityTypes.length}`}
+                    <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
+                </div>
+                {isOpen && (
+                    <div className="options-container">
+                        {disabilities.map((disability, index) => (
+                            <div 
+                                key={index} 
+                                className={`option ${formData.disabilityTypes.includes(disability) ? 'selected' : ''}`}
+                                onClick={() => toggleDisability(disability)}
+                            >
+                                <span className="checkbox">
+                                    {formData.disabilityTypes.includes(disability) && '✓'}
+                                </span>
+                                {disability}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <input 
+                type="text" 
+                placeholder="Job Interest"
+                name="jobInterest"
+                value={formData.jobInterest}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+            />
+        </>
+    );
+
+    const renderInternshipForm = () => (
+        <>
+            <input 
+                type="text" 
+                placeholder="First Name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="email" 
+                placeholder="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="tel" 
+                placeholder="Phone Number"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+            />
+        </>
+    );
+
+    const renderMemberForm = () => (
+        <>
+            <input 
+                type="text" 
+                placeholder="First Name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="email" 
+                placeholder="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Member ID"
+                name="memberId"
+                value={formData.memberId}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+            />
+            <input 
+                type="password" 
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+            />
+        </>
+    );
+
     return(
         <div className="flex column page center">
-            <h1 className='green-text'>Intern Sign-up</h1>
+            <h1 className='green-text'>{role} Sign-up</h1>
             <form onSubmit={handleSubmit} className="flex column center auth-box">
-                <input 
-                    type="text" 
-                    placeholder="First Name"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="text" 
-                    placeholder="Last Name"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="email" 
-                    placeholder="Email Address"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="text" 
-                    placeholder="Disability Card Code"
-                    name="disabilityCardCode"
-                    value={formData.disabilityCardCode}
-                    onChange={handleChange}
-                    required
-                />
-                <div className="custom-select" ref={dropdownRef}>
-                    <div 
-                        className="select-header" 
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {formData.disabilityTypes.length === 0 
-                            ? "Select Disabilities" 
-                            : `Selected: ${formData.disabilityTypes.length}`}
-                        <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
-                    </div>
-                    {isOpen && (
-                        <div className="options-container">
-                            {disabilities.map((disability, index) => (
-                                <div 
-                                    key={index} 
-                                    className={`option ${formData.disabilityTypes.includes(disability) ? 'selected' : ''}`}
-                                    onClick={() => toggleDisability(disability)}
-                                >
-                                    <span className="checkbox">
-                                        {formData.disabilityTypes.includes(disability) && '✓'}
-                                    </span>
-                                    {disability}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-                <input 
-                    type="text" 
-                    placeholder="Job Interest"
-                    name="jobInterest"
-                    value={formData.jobInterest}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="password" 
-                    placeholder="Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="password" 
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                />
+                {role === 'Intern' && renderInternForm()}
+                {role === 'Internship' && renderInternshipForm()}
+                {role === 'Member' && renderMemberForm()}
                 <button type="submit">Submit</button>
                 <p className="login-link black-text">already have an account{"  "}
                     <Link to="/login">login here</Link>
