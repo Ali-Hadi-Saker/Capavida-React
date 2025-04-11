@@ -3,6 +3,7 @@ import {getUser, getAuthHeader} from "../../utils/auth.js";
 import './style.css';
 import MarketPlaceCard from "../../Components/MarketplaceCard/index.jsx";
 import MarketplaceForm from "../../Components/MarketplaceForm";
+import GenericForm from "../../Components/GenericForm";
 
 const Marketplace = ()=> {
     // const [matchedMarketPlace, setMatchedMarketPlace] = useState([]);
@@ -88,10 +89,15 @@ const Marketplace = ()=> {
             </button>
 
             {showModal && (
-                <MarketplaceForm
+                <GenericForm
+                    type="Marketplace"
                     onSubmit={handleSubmit}
                     onClose={() => setShowModal(false)}
                 />
+                // <MarketplaceForm
+                //     onSubmit={handleSubmit}
+                //     onClose={() => setShowModal(false)}
+                // />
             )}
         </div>
     )

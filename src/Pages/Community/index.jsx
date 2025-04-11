@@ -3,6 +3,7 @@ import { getAuthHeader } from '../../utils/auth';
 import './style.css';
 import CommunityForm from '../../Components/CommunityForm';
 import CommunityCard from '../../Components/CommunityCard';
+import GenericForm from '../../Components/GenericForm';
 
 const Community = () => {
     const [communities, setCommunities] = useState([]);
@@ -81,7 +82,8 @@ const Community = () => {
             </button>
 
             {showModal && (
-                <CommunityForm
+                <GenericForm
+                    type="Community"
                     onSubmit={handleSubmit}
                     onClose={() => setShowModal(false)}
                 />
