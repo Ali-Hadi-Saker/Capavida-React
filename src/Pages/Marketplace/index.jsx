@@ -11,6 +11,8 @@ const Marketplace = ()=> {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const user = getUser();
+    const isIntern = user?.role === 'intern';
 
     useEffect(() => {
         fetchMarketPlace();
@@ -84,9 +86,10 @@ const Marketplace = ()=> {
                     />
                 ))}
             </div>
+            {isIntern && 
             <button className="create-marketplace-btn" onClick={() => setShowModal(true)}>
                 <i className="fa fa-plus"></i> Create New Marketplace
-            </button>
+            </button>}
 
             {showModal && (
                 <GenericForm

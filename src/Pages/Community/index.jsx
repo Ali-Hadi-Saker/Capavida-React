@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuthHeader } from '../../utils/auth';
+import { getAuthHeader, getUser } from '../../utils/auth';
 import './style.css';
 import CommunityForm from '../../Components/CommunityForm';
 import CommunityCard from '../../Components/CommunityCard';
@@ -10,6 +10,8 @@ const Community = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const user = getUser();
+    const isIntern = user?.role === 'intern';
 
     useEffect(() => {
         fetchCommunities();
@@ -77,9 +79,10 @@ const Community = () => {
                     <CommunityCard key={community._id} community={community} />
                 ))}
             </div>
+            {isIntern &&
             <button className="create-community-btn" onClick={() => setShowModal(true)}>
                 <i className="fa fa-plus"></i> Create New Community
-            </button>
+            </button>}
 
             {showModal && (
                 <GenericForm
