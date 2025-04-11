@@ -13,16 +13,21 @@ const categories = [
     "Artisan Products and Services"
 ];
 
+const skillTypes = ["Practical Skill", "Labor Intensive Skill", "Technical Skills", "Business Skill", "Care and Health"]
+
 const GenericForm = ({ type, onSubmit, onClose }) => {
     const [formData, setFormData] = useState({
         name: '',
+        title: '',
         description: '',
         location: '',
         category: '',
         disabilityType: [],
+        skillType: '',
         ownerName: '',
         slogan: '',
         policies: '',
+        duration: '',
         image: null
     });
 
@@ -78,7 +83,24 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <h2>Create New {type}</h2>
                 <form onSubmit={handleSubmit} className="generic-form">
-                    <div className="form-group">
+                    {type === 'Internship' && (
+                        <>
+                            <div className="form-group">
+                                <label>{type} title:</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        </>
+                    )
+                    }
+                    {type !== 'Internship' && (
+                        <>
+                        <div className="form-group">
                         <label>{type} Name:</label>
                         <input
                             type="text"
@@ -87,7 +109,8 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                             onChange={handleInputChange}
                             required
                         />
-                    </div>
+                    </div></>
+                    )}
                     <div className="form-group">
                         <label>Description:</label>
                         <textarea
@@ -198,6 +221,74 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                             </div>
                         </>
                     )}
+                    {type === 'Internship' && (
+                        <>
+                        <div className="form-group">
+                            <label>Skill type:</label>
+                            <select
+                                name="category"
+                                value={formData.skillType}
+                                onChange={handleInputChange}
+                                required
+                            >
+                                <option value="">Select a skill type</option>
+                                {skillTypes.map((skill, index) => (
+                                    <option key={index} value={skill}>
+                                        {skill}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Disability Types:</label>
+                            <div className="custom-select" ref={dropdownRef}>
+                                <div 
+                                    className="select-header" 
+                                    onClick={() => setIsOpen(!isOpen)}
+                                >
+                                    {formData.disabilityType.length === 0 
+                                        ? "Select Disabilities" 
+                                        : `Selected: ${formData.disabilityType.length}`}
+                                    <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
+                                </div>
+                                {isOpen && (
+                                    <div className="options-container">
+                                        {disabilities.map((disability, index) => (
+                                            <div 
+                                                key={index} 
+                                                className={`option ${formData.disabilityType.includes(disability) ? 'selected' : ''}`}
+                                                onClick={() => toggleDisability(disability)}
+                                            >
+                                                <span className="checkbox">
+                                                    {formData.disabilityType.includes(disability) && '✓'}
+                                                </span>
+                                                {disability}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Duration:</label>
+                            <textarea
+                                name="duration"
+                                value={formData.duration}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Location:</label>
+                            <textarea
+                                name="location"
+                                value={formData.location}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                    </>)}
+                    
                     <div className="form-actions">
                         <button type="button" onClick={onClose} className="cancel-btn">
                             Cancel

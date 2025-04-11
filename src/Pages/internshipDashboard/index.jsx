@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import './style.css';
 import { getAuthHeader, getUser } from '../../utils/auth';
+import GenericForm from '../../Components/GenericForm';
 
 const InternshipDashboard = ()=> {
+const [showModal, setShowModal] = useState(false);
 const [createdInternships, setCreatedInternships] = useState([]);
 useEffect(() => {fetchInternships()}, []);
 
@@ -30,9 +32,23 @@ const findCreatedInternships = (internships)=> {
     setCreatedInternships(matched);
 }
 
+const handleSubmit =  () => {
+    console.log("submit");
+}
+
     return(
         <div>
             internship
+            <button className="create-marketplace-btn" onClick={() => setShowModal(true)}>
+                <i className="fa fa-plus"></i> Create New Internship
+            </button>
+            {showModal && (
+                <GenericForm
+                    type="Internship"
+                    onSubmit={handleSubmit}
+                    onClose={() => setShowModal(false)}
+                />
+            )}
         </div>
     )
 }
