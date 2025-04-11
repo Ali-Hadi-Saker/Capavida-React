@@ -13,6 +13,12 @@ const categories = [
     "Artisan Products and Services"
 ];
 
+const internshipDurations = [
+    "1 month",
+    "2 months",
+    "3 months"
+]
+
 const skillTypes = ["Practical Skill", "Labor Intensive Skill", "Technical Skills", "Business Skill", "Care and Health"]
 
 const GenericForm = ({ type, onSubmit, onClose }) => {
@@ -22,13 +28,14 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
         description: '',
         location: '',
         category: '',
-        disabilityType: [],
+        disabilityTypes: [],
         skillType: '',
         ownerName: '',
         slogan: '',
         policies: '',
         duration: '',
-        image: null
+        image: null,
+        requirements: ''
     });
 
     const [isOpen, setIsOpen] = useState(false);
@@ -63,12 +70,13 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
 
     const toggleDisability = (disability) => {
         setFormData(prev => {
-            const updatedDisabilities = prev.disabilityType.includes(disability)
-                ? prev.disabilityType.filter(d => d !== disability)
-                : [...prev.disabilityType, disability];
+            const currentDisabilities = prev.disabilityTypes || [];
+            const updatedDisabilities = currentDisabilities.includes(disability)
+                ? currentDisabilities.filter(d => d !== disability)
+                : [...currentDisabilities, disability];
             return {
                 ...prev,
-                disabilityType: updatedDisabilities
+                disabilityTypes: updatedDisabilities
             };
         });
     };
@@ -96,8 +104,7 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                                 />
                             </div>
                         </>
-                    )
-                    }
+                    )}
                     {type !== 'Internship' && (
                         <>
                         <div className="form-group">
@@ -165,9 +172,9 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                                         className="select-header" 
                                         onClick={() => setIsOpen(!isOpen)}
                                     >
-                                        {formData.disabilityType.length === 0 
+                                        {formData.disabilityTypes.length === 0 
                                             ? "Select Disabilities" 
-                                            : `Selected: ${formData.disabilityType.length}`}
+                                            : `Selected: ${formData.disabilityTypes.length}`}
                                         <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
                                     </div>
                                     {isOpen && (
@@ -175,11 +182,11 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                                             {disabilities.map((disability, index) => (
                                                 <div 
                                                     key={index} 
-                                                    className={`option ${formData.disabilityType.includes(disability) ? 'selected' : ''}`}
+                                                    className={`option ${formData.disabilityTypes.includes(disability) ? 'selected' : ''}`}
                                                     onClick={() => toggleDisability(disability)}
                                                 >
                                                     <span className="checkbox">
-                                                        {formData.disabilityType.includes(disability) && '✓'}
+                                                        {formData.disabilityTypes.includes(disability) && '✓'}
                                                     </span>
                                                     {disability}
                                                 </div>
@@ -226,7 +233,7 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                         <div className="form-group">
                             <label>Skill type:</label>
                             <select
-                                name="category"
+                                name="skillType"
                                 value={formData.skillType}
                                 onChange={handleInputChange}
                                 required
@@ -240,15 +247,39 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                             </select>
                         </div>
                         <div className="form-group">
+                            <label>Duration:</label>
+                            <select
+                                name="duration"
+                                value={formData.duration}
+                                onChange={handleInputChange}
+                                required
+                            >
+                                <option value="">Select Duration</option>
+                                {internshipDurations.map((duration, index) => (
+                                    <option key={index} value={duration}>{duration}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Location:</label>
+                            <input
+                                type="text"
+                                name="location"
+                                value={formData.location}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
                             <label>Disability Types:</label>
                             <div className="custom-select" ref={dropdownRef}>
                                 <div 
                                     className="select-header" 
                                     onClick={() => setIsOpen(!isOpen)}
                                 >
-                                    {formData.disabilityType.length === 0 
+                                    {formData.disabilityTypes.length === 0 
                                         ? "Select Disabilities" 
-                                        : `Selected: ${formData.disabilityType.length}`}
+                                        : `Selected: ${formData.disabilityTypes.length}`}
                                     <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
                                 </div>
                                 {isOpen && (
@@ -256,11 +287,11 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                                         {disabilities.map((disability, index) => (
                                             <div 
                                                 key={index} 
-                                                className={`option ${formData.disabilityType.includes(disability) ? 'selected' : ''}`}
+                                                className={`option ${formData.disabilityTypes.includes(disability) ? 'selected' : ''}`}
                                                 onClick={() => toggleDisability(disability)}
                                             >
                                                 <span className="checkbox">
-                                                    {formData.disabilityType.includes(disability) && '✓'}
+                                                    {formData.disabilityTypes.includes(disability) && '✓'}
                                                 </span>
                                                 {disability}
                                             </div>
@@ -268,24 +299,6 @@ const GenericForm = ({ type, onSubmit, onClose }) => {
                                     </div>
                                 )}
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <label>Duration:</label>
-                            <textarea
-                                name="duration"
-                                value={formData.duration}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Location:</label>
-                            <textarea
-                                name="location"
-                                value={formData.location}
-                                onChange={handleInputChange}
-                                required
-                            />
                         </div>
                     </>)}
                     

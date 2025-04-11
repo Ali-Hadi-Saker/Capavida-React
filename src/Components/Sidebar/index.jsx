@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
+import { getUser } from '../../utils/auth';
 import './style.css';
 
 const Sidebar = ({isOpen, toggleSidebar}) => {
+    const user = getUser();
+    const isInternship = user?.role === 'internship';
+
     return (
         <>
             <div className={`sidebar-overlay ${isOpen ? "open" : ""}`} onClick={toggleSidebar}></div>
@@ -14,7 +18,11 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
                 </div>
                 <ul className='sidebar-menu'>
                     <li>
-                        <Link to="/home" onClick={toggleSidebar} className="sidebar-link">
+                        <Link 
+                            to={isInternship ? "/InternshipDash" : "/home"} 
+                            onClick={toggleSidebar} 
+                            className="sidebar-link"
+                        >
                             <i className="fa fa-home"></i>
                             <span>Dashboard</span>
                         </Link>
