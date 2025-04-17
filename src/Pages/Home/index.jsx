@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isAuthenticated, getAuthHeader, handleAuthResponse } from '../../utils/auth';
 import "./style.css";
+import WhatsAppButton from '../../Components/WhatsAppButton';
 
 const Home = () => {
     const [enrolledInternships, setEnrolledInternships] = useState([]);
@@ -173,6 +174,7 @@ const Home = () => {
                     {enrolledInternships.map(renderEnrolledInternshipCard)}
                 </div>
             )}
+
 
             {/* <section className="marketplace-section">
                 <h2>Marketplace</h2>

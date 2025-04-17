@@ -1,0 +1,21 @@
+.message-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.message-container span {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #0068b8;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}

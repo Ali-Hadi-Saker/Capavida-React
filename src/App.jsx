@@ -18,10 +18,11 @@ import RoleSelection from './Pages/RoleSelection';
 import InternshipCategories from './Pages/InternshipCategories';
 import InternshipDashboard from './Pages/internshipDashboard';
 import MemberDashborad from './Pages/memberDashborad';
+import InternshipAfterRegistration from './Pages/InternshipAfterRegistration';
 
 const AppContent = () => {
   const location = useLocation();
-  const showNavbar = !['/register/Intern', '/register/Internship', '/register/Member', '/login', '/', '/internships'].includes(location.pathname);
+  const showNavbar = !['/register/Intern', '/register/Internship', '/register/Member', '/login', '/', '/internships', '/afterRegistarion'].includes(location.pathname);
 
   return (
     <div>
@@ -30,6 +31,7 @@ const AppContent = () => {
         <Route path='/' element={<RoleSelection/>}/>
         <Route path='register/:role' element={<Register/>}/>
         <Route path='/Login' element={<Login/>}/>
+        <Route path='/afterRegistarion' element={<InternshipAfterRegistration/>}/>
         <Route path='/Home' element={<Home/>}/>
         <Route path="/profile" element={<Profile />} />
         <Route path="/community" element={<Community />} />

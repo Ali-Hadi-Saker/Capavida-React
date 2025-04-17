@@ -278,6 +278,9 @@ const Register = () => {
                     <Link to="/login">login here</Link>
                 </p>
             </form>
+            <button className="contact-us-btn" onClick={() => navigate('/afterRegistarion')}>
+                <i className="fa fa-arrow-right"></i> Contact us
+            </button>
         </div>
     );
 };
