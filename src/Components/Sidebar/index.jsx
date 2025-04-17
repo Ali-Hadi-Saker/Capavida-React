@@ -5,6 +5,7 @@ import './style.css';
 const Sidebar = ({isOpen, toggleSidebar}) => {
     const user = getUser();
     const isInternship = user?.role === 'internship';
+    const isMember = user?.role === 'member';
 
     return (
         <>
@@ -19,7 +20,7 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
                 <ul className='sidebar-menu'>
                     <li>
                         <Link 
-                            to={isInternship ? "/InternshipDash" : "/home"} 
+                            to={isInternship ? "/internshipDash" : isMember ? "/memberDash" : "/home"} 
                             onClick={toggleSidebar} 
                             className="sidebar-link"
                         >

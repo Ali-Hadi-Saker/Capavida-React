@@ -37,10 +37,10 @@ const Login = () => {
             if (data.user.role === 'intern') {
                 navigate('/internships');
             } else if (data.user.role === 'internship'){
-                navigate('/InternshipDash');
+                navigate('/internshipDash');
             }
             else {
-                navigate('/home');
+                navigate('/memberDash');
             }
         } catch (err) {
             setError(err.message || 'Failed to login. Please try again.');

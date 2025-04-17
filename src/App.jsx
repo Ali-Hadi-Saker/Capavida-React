@@ -17,6 +17,7 @@ import Navbar from './Components/Navbar';
 import RoleSelection from './Pages/RoleSelection';
 import InternshipCategories from './Pages/InternshipCategories';
 import InternshipDashboard from './Pages/internshipDashboard';
+import MemberDashborad from './Pages/memberDashborad';
 
 const AppContent = () => {
   const location = useLocation();
@@ -36,7 +37,9 @@ const AppContent = () => {
         <Route path="/internships" element={<Internships />} />
         <Route path="/help" element={<Help />} />
         <Route path="/categories" element={<InternshipCategories/>} />
-        <Route path="/InternshipDash" element={<InternshipDashboard/>} />
+        <Route path="/internshipDash" element={<InternshipDashboard/>} />
+        <Route path="/memberDash" element={<MemberDashborad/>} />
+
 
       </Routes>
     </div>
