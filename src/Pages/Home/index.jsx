@@ -94,7 +94,7 @@ const Home = () => {
         setAiResponse("");
 
         try {
-            const response = await fetch('http://localhost:5000/api/ai/ask', {
+            const response = await fetch('http://localhost:5000/api/chatbot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +108,8 @@ const Home = () => {
             }
 
             const data = await response.json();
-            setAiResponse(data.response);
+            console.log(data);
+            setAiResponse(data.answer);
         } catch (err) {
             setAiResponse("Sorry, I couldn't process your request. Please try again.");
         } finally {

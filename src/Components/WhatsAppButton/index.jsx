@@ -1,8 +1,8 @@
 import './style.css';
 
 const WhatsAppButton = ()=> {
-    const phoneNumber = 71357928;
-    const message = 'How can we help you';
+    const phoneNumber = 81059118;
+    const message = 'Can I get more infos about this?';
     
     const handleClick = ()=> {
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
