@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './style.css';
+import API from '../../services/api';
 
 const Register = () => {
     const { role } = useParams();
@@ -69,7 +70,7 @@ const Register = () => {
             return;
         }
         // Add your registration logic here
-        console.log(formData);
+        navigate('/afterRegistarion');
     };
 
     const renderInternForm = () => (

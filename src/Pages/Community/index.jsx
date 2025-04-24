@@ -4,6 +4,7 @@ import './style.css';
 import CommunityForm from '../../Components/CommunityForm';
 import CommunityCard from '../../Components/CommunityCard';
 import GenericForm from '../../Components/GenericForm';
+import API from '../../services/api';
 
 const Community = () => {
     const [communities, setCommunities] = useState([]);
@@ -19,7 +20,7 @@ const Community = () => {
 
     const fetchCommunities = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/communities', {
+            const response = await fetch(API.COMMUNIITIES, {
                 headers: {
                     ...getAuthHeader()
                 }
@@ -42,7 +43,7 @@ const Community = () => {
 
     const handleSubmit = async (formData) => {
         try {
-            const response = await fetch('http://localhost:5000/api/communities', {
+            const response = await fetch(API.COMMUNIITIES, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

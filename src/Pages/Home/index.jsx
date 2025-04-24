@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { isAuthenticated, getAuthHeader, handleAuthResponse } from '../../utils/auth';
 import "./style.css";
 import WhatsAppButton from '../../Components/WhatsAppButton';
+import API from '../../services/api';
 
 const Home = () => {
     const [enrolledInternships, setEnrolledInternships] = useState([]);
@@ -24,7 +25,7 @@ const Home = () => {
 
     const fetchEnrolledInternships = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/internship/enrolled/me', {
+            const response = await fetch(API.ENROLLED_INTERNSHIPS, {
                 headers: {
                     ...getAuthHeader()
                 }
@@ -56,7 +57,7 @@ const Home = () => {
         setError(null);
         
         try {
-            const response = await fetch(`http://localhost:5000/api/internship/${internshipId}/withdraw`, {
+            const response = await fetch(API.WITHDRAW_INTERNSHIPS(internshipId), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ const Home = () => {
         setAiResponse("");
 
         try {
-            const response = await fetch('http://localhost:5000/api/chatbot', {
+            const response = await fetch(API.CHATBOT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { isAuthenticated, getAuthHeader, handleAuthResponse, getUser } from '../../utils/auth';
 import InternshipCard from '../../Components/InternshipCard';
 import './style.css';
+import API from "../../services/api";
 
 const Internships = () => {
     const [matchedInternships, setMatchedInternships] = useState([]);
@@ -22,7 +23,7 @@ const Internships = () => {
 
     const fetchInternships = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/internship', {
+            const response = await fetch(API.AVAILABLE_INTERNSHIPS, {
                 headers: {
                     ...getAuthHeader()
                 }
@@ -63,7 +64,7 @@ const Internships = () => {
     const handleEnroll = async (internshipId) => {
         try {
             setEnrollingId(internshipId);
-            const response = await fetch(`http://localhost:5000/api/internship/${internshipId}/enroll`, {
+            const response = await fetch(API.ENROLL_INTERNSHIP(internshipId), {
                 method: 'POST',
                 headers: {
                     ...getAuthHeader()

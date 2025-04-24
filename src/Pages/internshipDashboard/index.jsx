@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './style.css';
 import { getAuthHeader, getUser } from '../../utils/auth';
 import GenericForm from '../../Components/GenericForm';
+import API from '../../services/api';
 
 const InternshipDashboard = () => {
     const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,7 @@ const InternshipDashboard = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch('http://localhost:5000/api/internship', {
+            const response = await fetch(API.AVAILABLE_INTERNSHIPS, {
                 headers: {
                     ...getAuthHeader()
                 }
@@ -73,7 +74,7 @@ const InternshipDashboard = () => {
 
     const handleSubmit = async (formData) => {
         try {
-            const response = await fetch('http://localhost:5000/api/internship', {
+            const response = await fetch(API.AVAILABLE_INTERNSHIPS, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

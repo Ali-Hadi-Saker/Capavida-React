@@ -4,6 +4,7 @@ import './style.css';
 import MarketPlaceCard from "../../Components/MarketplaceCard/index.jsx";
 import MarketplaceForm from "../../Components/MarketplaceForm";
 import GenericForm from "../../Components/GenericForm";
+import API from "../../services/api.js";
 
 const Marketplace = ()=> {
     // const [matchedMarketPlace, setMatchedMarketPlace] = useState([]);
@@ -20,7 +21,7 @@ const Marketplace = ()=> {
 
     const fetchMarketPlace = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/marketplace');
+            const response = await fetch(API.MARKETPLACE);
             const data = await response.json();
             console.log(data);
             setMarketPlace(data.items);
@@ -47,7 +48,7 @@ const Marketplace = ()=> {
 
     const handleSubmit = async (formData) => {
         try {
-            const response = await fetch('http://localhost:5000/api/marketplace', {
+            const response = await fetch(API.MARKETPLACE, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

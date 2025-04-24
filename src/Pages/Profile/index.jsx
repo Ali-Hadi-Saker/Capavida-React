@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isAuthenticated, getUser, getAuthHeader, clearAuth } from '../../utils/auth';
 import './style.css';
+import API from '../../services/api';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Profile = () => {
 
     const fetchEnrolledInternships = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/internship/enrolled/me', {
+            const response = await fetch(API.ENROLLED_INTERNSHIPS, {
                 headers: {
                     ...getAuthHeader()
                 }
