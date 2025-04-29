@@ -1,7 +1,7 @@
 import './style.css';
 
 const WhatsAppButton = ()=> {
-    const phoneNumber = 81059118;
+    const phoneNumber = +96181059118;
     const message = 'Can I get more infos about this?';
     
     const handleClick = ()=> {
